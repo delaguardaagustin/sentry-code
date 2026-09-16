@@ -112,6 +112,21 @@ header{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 8
 .card--media .card-body{padding:22px 24px}
 .portfolio .after{margin-top:32px;text-align:center}
 
+/* ---- carrusel de demos ---- */
+.carousel{margin-top:40px}
+.carousel-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.carousel-track::-webkit-scrollbar{display:none}
+.carousel-item{flex:0 0 auto;width:260px;scroll-snap-align:start;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;text-decoration:none;color:inherit;transition:border-color .15s ease,transform .15s ease}
+.carousel-item:hover{border-color:var(--steel);transform:translateY(-2px)}
+.carousel-item img{width:100%;aspect-ratio:700/291;object-fit:cover;object-position:top;display:block;filter:saturate(.94)}
+.carousel-item .ci-body{padding:14px 16px}
+.carousel-item .ci-body b{display:block;font-size:.9rem;margin-bottom:2px}
+.carousel-item .ci-body span{font-size:.76rem;color:var(--muted)}
+.carousel-nav{display:none;gap:8px;justify-content:flex-end;margin-top:12px}
+@media(min-width:640px){.carousel-nav{display:flex}}
+.carousel-nav button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line-2);background:var(--surface);color:var(--text);cursor:pointer;font-size:1.1rem;line-height:1;display:flex;align-items:center;justify-content:center}
+.carousel-nav button:hover{border-color:var(--steel);color:var(--steel)}
+
 /* ---- contacto ---- */
 .contact-grid{display:grid;grid-template-columns:1fr;gap:36px}
 @media(min-width:860px){.contact-grid{grid-template-columns:1.1fr .9fr;gap:50px}}
@@ -374,6 +389,40 @@ footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-s
 </div>
 </div>
 </div>
+
+<div class="carousel reveal">
+<p class="eyebrow">Más demos publicadas, todas en vivo</p>
+<div class="carousel-track" id="carouselTrack">
+<a class="carousel-item" href="https://delaguardaagustin.github.io/barberia-corleone/" target="_blank" rel="noopener">
+<img src="assets/carrusel/barberia-corleone.jpg" alt="Demo publicada de Barbería Corleone" loading="lazy">
+<div class="ci-body"><b>Barbería Corleone</b><span>Las Condes</span></div>
+</a>
+<a class="carousel-item" href="https://delaguardaagustin.github.io/barberia-el-russo/" target="_blank" rel="noopener">
+<img src="assets/carrusel/barberia-el-russo.jpg" alt="Demo publicada de Barbería El Russo" loading="lazy">
+<div class="ci-body"><b>Barbería El Russo</b><span>La Florida</span></div>
+</a>
+<a class="carousel-item" href="https://delaguardaagustin.github.io/chilean-clan-lastarria/" target="_blank" rel="noopener">
+<img src="assets/carrusel/chilean-clan-lastarria.jpg" alt="Demo publicada de Chilean Clan Lastarria" loading="lazy">
+<div class="ci-body"><b>Chilean Clan Lastarria</b><span>Santiago Centro</span></div>
+</a>
+<a class="carousel-item" href="https://delaguardaagustin.github.io/lordbarber-spa/" target="_blank" rel="noopener">
+<img src="assets/carrusel/lordbarber-spa.jpg" alt="Demo publicada de LordBarber Spa" loading="lazy">
+<div class="ci-body"><b>LordBarber Spa</b><span>Ñuñoa</span></div>
+</a>
+<a class="carousel-item" href="https://delaguardaagustin.github.io/russos-barberia/" target="_blank" rel="noopener">
+<img src="assets/carrusel/russos-barberia.jpg" alt="Demo publicada de Russo's Barbería" loading="lazy">
+<div class="ci-body"><b>Russo's Barbería</b><span>La Cisterna</span></div>
+</a>
+<a class="carousel-item" href="https://delaguardaagustin.github.io/isc-barr-tatoo/" target="_blank" rel="noopener">
+<img src="assets/carrusel/isc-barr-tatoo.jpg" alt="Demo publicada de ISC Barr Tattoo" loading="lazy">
+<div class="ci-body"><b>ISC Barr Tattoo</b><span>San Bernardo</span></div>
+</a>
+</div>
+<div class="carousel-nav">
+<button type="button" id="carPrev" aria-label="Ver demo anterior">‹</button>
+<button type="button" id="carNext" aria-label="Ver demo siguiente">›</button>
+</div>
+</div>
 </div>
 </section>
 
@@ -442,6 +491,21 @@ footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-s
 
 <script>
 document.getElementById('y').textContent = new Date().getFullYear();
+
+(function(){
+  var track = document.getElementById('carouselTrack');
+  if(!track) return;
+  var prev = document.getElementById('carPrev');
+  var next = document.getElementById('carNext');
+  function scrollByCard(dir){
+    var card = track.querySelector('.carousel-item');
+    var gap = 16;
+    var amount = (card ? card.offsetWidth : 260) + gap;
+    track.scrollBy({ left: dir * amount, behavior: 'smooth' });
+  }
+  prev.addEventListener('click', function(){ scrollByCard(-1); });
+  next.addEventListener('click', function(){ scrollByCard(1); });
+})();
 var io = new IntersectionObserver(function(entries){
   entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
 }, {threshold:.15});
