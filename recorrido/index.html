@@ -41,7 +41,8 @@ header{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;align-items:cente
 .paradas a.activa{background:var(--steel);border-color:var(--steel);box-shadow:0 0 12px var(--steel);transform:scale(1.25)}
 .paradas a span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
-main{position:relative;z-index:10}
+main{position:relative;z-index:10;pointer-events:none}
+.carta,footer{pointer-events:auto}
 .tramo{min-height:118vh;display:flex;align-items:center;padding:96px clamp(18px,6vw,84px)}
 .tramo.der{justify-content:flex-end}
 .tramo.centro{justify-content:center;text-align:center}
@@ -307,26 +308,28 @@ if (!hay3d) {
 
   /* Sala de trabajos: cuadros con capturas reales de los sitios */
   const cargador = new THREE.TextureLoader();
-  function cuadro(lado, z, imagen, nombre) {
+  const tocables = [];
+  function cuadro(lado, z, imagen, nombre, enlace) {
     const g = new THREE.Group(); g.position.set(lado * (MITAD - .02), 2.05, z); g.rotation.y = -lado * Math.PI / 2; escena.add(g);
     const marco = new THREE.Mesh(new THREE.BoxGeometry(3.16, 2.16, .08), mat(0x2a2417, .35, .7)); g.add(marco);
     const filo = new THREE.Mesh(new THREE.PlaneGeometry(3.06, 2.06), luz(ORO)); filo.position.z = .045; g.add(filo);
     const tex = cargador.load(imagen); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8;
-    const foto = new THREE.Mesh(new THREE.PlaneGeometry(3, 2), new THREE.MeshBasicMaterial({ map: tex })); foto.position.z = .05; g.add(foto);
+    const foto = new THREE.Mesh(new THREE.PlaneGeometry(3, 2), new THREE.MeshBasicMaterial({ map: tex })); foto.position.z = .05; g.add(foto); foto.userData.enlace = enlace; tocables.push(foto);
     const pie = cartel(nombre, { ancho: 3, alto: .26, color: '#d8ac54', fuente: '500 56px "IBM Plex Mono"', espaciado: '0.18em' }); g.add(pie); pie.position.set(0, -1.32, .05);
     const l = new THREE.PointLight(0xffe2b0, 9, 7, 1.8); l.position.set(lado * (MITAD - 1.6), 3.3, z); escena.add(l);
   }
-  cuadro(-1, -33, 'assets/portafolio-viva-sushi.jpg', 'VIVASUSHI.CL');
-  cuadro(1, -39, 'assets/portafolio-residencia.jpg', 'RESIDENCIASENIORWALL.CL');
-  cuadro(-1, -45, 'assets/portafolio-obelisco.jpg', 'TRANSPORTESOBELISCO.CL');
-  cuadro(1, -51, 'assets/portafolio-festival.webp', 'FESTIVALPEWMAANTU.CL');
-  cuadro(-1, -57, 'assets/nexerp-hero.jpg', 'NEXERP');
+  cuadro(-1, -33, 'assets/portafolio-viva-sushi.jpg', 'VIVASUSHI.CL', 'https://www.vivasushi.cl/');
+  cuadro(1, -39, 'assets/portafolio-residencia.jpg', 'RESIDENCIASENIORWALL.CL', 'https://residenciaseniorwall.cl/');
+  cuadro(-1, -45, 'assets/portafolio-obelisco.jpg', 'TRANSPORTESOBELISCO.CL', 'https://www.transportesobelisco.cl/');
+  cuadro(1, -51, 'assets/portafolio-festival.webp', 'FESTIVALPEWMAANTU.CL', 'https://festivalpewmaantu.cl/');
+  cuadro(-1, -57, 'assets/nexerp-hero.jpg', 'NEXERP', 'https://nexerp-frontend-toy0.onrender.com');
   const rotSala = cartel('TRABAJO REAL', { ancho: 2.6, alto: .4, color: '#d8ac54', espaciado: '0.14em' }); rotSala.position.set(0, 3.5, -29.5);
   caja(ANCHO, .05, .05, luz(ORO), 0, 3.22, -29.5);
 
   /* Fondo: la puerta dorada del contacto */
   caja(ANCHO, ALTO, .3, mat(0x12161a), 0, ALTO / 2, -LARGO - .15);
   const portal = new THREE.Mesh(new THREE.PlaneGeometry(2, 3.1), luz(0xf0cf8a)); portal.position.set(0, 1.55, -LARGO + .02); escena.add(portal);
+  portal.userData.enlace = 'https://wa.me/56974479565?text=' + encodeURIComponent('Hola, vi su página y quiero cotizar'); tocables.push(portal);
   for (const x of [-1.06, 1.06]) caja(.08, 3.2, .1, luz(ORO), x, 1.6, -LARGO + .05);
   caja(2.2, .08, .1, luz(ORO), 0, 3.2, -LARGO + .05);
   const rotFin = cartel('HABLEMOS', { ancho: 2.4, alto: .46, color: '#d8ac54', espaciado: '0.16em' }); rotFin.position.set(0, 3.62, -LARGO + .06);
@@ -357,6 +360,21 @@ if (!hay3d) {
   const curvaPos = new THREE.CatmullRomCurve3(poses.map(p => p[0]), false, 'catmullrom', .35);
   const curvaMira = new THREE.CatmullRomCurve3(poses.map(p => p[1]), false, 'catmullrom', .35);
   const suave = t => t * t * (3 - 2 * t);
+
+  /* Cuadros y puerta final se pueden tocar: abren el sitio del cliente (o WhatsApp) en otra pestaña.
+     Solo cuenta como toque si el dedo o el mouse casi no se movió, para no confundirlo con el scroll. */
+  const rayo = new THREE.Raycaster(), punto = new THREE.Vector2(); let abajo = null;
+  function bajoElPuntero(ev) {
+    punto.set(ev.clientX / innerWidth * 2 - 1, -(ev.clientY / innerHeight) * 2 + 1); rayo.setFromCamera(punto, camara);
+    const h = rayo.intersectObjects(tocables, false)[0]; return h && h.distance < 9 ? h.object : null;
+  }
+  lienzo.addEventListener('pointerdown', ev => { abajo = { x: ev.clientX, y: ev.clientY, t: performance.now() }; });
+  lienzo.addEventListener('pointerup', ev => {
+    if (!abajo || Math.hypot(ev.clientX - abajo.x, ev.clientY - abajo.y) > 8 || performance.now() - abajo.t > 600) return;
+    const o = bajoElPuntero(ev); if (o) window.open(o.userData.enlace, '_blank', 'noopener');
+  });
+  lienzo.addEventListener('pointermove', ev => { if (ev.pointerType === 'mouse') lienzo.style.cursor = bajoElPuntero(ev) ? 'pointer' : ''; });
+  window.__recorrido_tocables = () => tocables.map(o => { const v = o.getWorldPosition(new THREE.Vector3()).project(camara); return { enlace: o.userData.enlace, x: (v.x + 1) / 2 * innerWidth, y: (1 - v.y) / 2 * innerHeight, z: v.z }; });
 
   function medir() { const w = innerWidth, h = innerHeight; render.setSize(w, h, false); camara.aspect = w / h; camara.updateProjectionMatrix(); }
   addEventListener('resize', medir); medir();
