@@ -221,6 +221,68 @@ footer a{color:var(--suave)}
 .chip:hover{border-color:var(--oro);background:rgba(245,185,66,.1)}
 .chat-foot{padding:12px 14px;border-top:1px solid var(--borde)}.chat-foot .btn{width:100%}
 
+/* confianza bajo los botones de la portada */
+.confia{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:26px;color:#c6d0dd;font-size:.95rem;font-weight:500}
+.confia span{display:inline-flex;align-items:center;gap:8px}
+.confia span::before{content:"";width:18px;height:18px;border-radius:50%;background:rgba(34,197,94,.18) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.8' fill='none' stroke='%2322c55e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
+/* cinta de rubros */
+.cinta{position:relative;overflow:hidden;border-block:1px solid var(--borde);background:linear-gradient(90deg,rgba(240,138,36,.1),rgba(245,185,66,.06),rgba(94,200,232,.08));padding:18px 0}
+.cinta .rueda{display:flex;width:max-content;animation:cinta 38s linear infinite}
+.cinta .rueda span{display:inline-flex;align-items:center;gap:28px;padding-right:28px;font:800 clamp(1.3rem,2.6vw,2rem)/1 var(--f-tit);text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+.cinta .rueda span i{width:9px;height:9px;transform:rotate(45deg);background:var(--naranja);border-radius:1px}
+.cinta .rueda span:nth-child(even) i{background:var(--oro)}
+@keyframes cinta{to{transform:translateX(-50%)}}
+/* como funciona */
+.pasos{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px}
+.pasos::before{content:"";position:absolute;left:46px;right:calc((100% - 54px)/4 - 46px);top:45px;height:2px;background:linear-gradient(90deg,var(--naranja),var(--oro),var(--verde));opacity:.55}
+.paso{position:relative;background:var(--panel);border:1px solid var(--borde);border-radius:20px;padding:22px 22px 24px}
+.paso b{position:relative;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--bg);border:2px solid var(--oro);font:800 1.3rem/1 var(--f-tit);color:var(--oro);margin:0 0 16px}
+.paso:last-child b{border-color:var(--verde);color:#7ee2a2}
+.paso h3{font-size:1.65rem;margin-bottom:8px}
+.paso p{margin:0;color:#c6d0dd;font-size:.98rem}
+.garantia{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;margin-top:22px;padding:22px 26px;border-radius:20px;border:1px dashed rgba(34,197,94,.55);background:rgba(34,197,94,.07)}
+.garantia p{margin:0;font:800 clamp(1.4rem,2.6vw,2rem)/1.05 var(--f-tit);text-transform:uppercase}
+.garantia p span{color:#7ee2a2}
+/* precios */
+.precios{background:radial-gradient(60% 50% at 50% 0%,rgba(245,185,66,.08),transparent 70%)}
+.paquetes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px;align-items:stretch}
+.paquete{position:relative;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--borde);border-radius:24px;padding:30px 26px 26px}
+.paquete.estrella{border:1.5px solid var(--oro);background:linear-gradient(165deg,rgba(245,185,66,.14),rgba(240,138,36,.05) 45%,rgba(255,255,255,.03));box-shadow:0 30px 70px -40px rgba(245,185,66,.7);transform:translateY(-10px)}
+.paquete .cinta-p{position:absolute;top:-13px;left:26px;font:800 .78rem/1 var(--f-tit);letter-spacing:.14em;text-transform:uppercase;color:#1a1204;background:linear-gradient(90deg,var(--naranja),var(--oro));padding:8px 14px;border-radius:999px}
+.paquete h3{font-size:2.1rem}
+.paquete .para{color:var(--suave);margin:8px 0 0;font-size:.98rem}
+.paquete .valor{font:800 3.1rem/1 var(--f-tit);margin:20px 0 0}
+.paquete .valor small{font:500 .95rem/1.3 var(--f-cuerpo);color:var(--suave);margin-left:6px}
+.paquete ul{list-style:none;margin:20px 0 22px;padding:20px 0 0;border-top:1px solid var(--borde);display:grid;gap:11px}
+.paquete li{position:relative;padding-left:26px;color:#c6d0dd;font-size:.98rem}
+.paquete li::before{content:"";position:absolute;left:3px;top:.5em;width:11px;height:6px;border-left:2px solid var(--verde);border-bottom:2px solid var(--verde);transform:rotate(-45deg)}
+.paquete .btn{margin-top:auto}
+.paquete.estrella .btn{background:var(--wa);border-color:var(--wa);color:#04210f}
+.letra-chica{margin:26px 0 0;text-align:center;color:var(--suave);font-size:.95rem}
+/* nicho: barberias y salones */
+.nicho .env{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center}
+.nicho .rasgos{list-style:none;margin:28px 0 30px;padding:0;display:grid;gap:16px}
+.nicho .rasgos li{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start}
+.nicho .rasgos li i{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font:800 1.05rem/1 var(--f-tit);font-style:normal;color:var(--oro);background:rgba(245,185,66,.1);border:1px solid rgba(245,185,66,.35)}
+.nicho .rasgos b{display:block;font:800 1.25rem/1.1 var(--f-tit);text-transform:uppercase;letter-spacing:.02em;margin-bottom:3px}
+.nicho .rasgos span{color:#c6d0dd;font-size:.97rem}
+/* preguntas */
+.preguntas{max-width:860px;margin:36px auto 0;display:grid;gap:12px}
+.preguntas details{background:var(--panel);border:1px solid var(--borde);border-radius:16px;padding:0 22px;transition:border-color .2s}
+.preguntas details[open]{border-color:rgba(245,185,66,.45)}
+.preguntas summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 0;font:800 1.3rem/1.15 var(--f-tit);text-transform:uppercase;letter-spacing:.02em}
+.preguntas summary::-webkit-details-marker{display:none}
+.preguntas summary::after{content:"+";flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--borde-2);color:var(--oro);font-size:1.3rem;transition:transform .2s}
+.preguntas details[open] summary::after{transform:rotate(45deg)}
+.preguntas details p{margin:0 0 20px;color:#c6d0dd}
+@media (max-width:980px){
+  .pasos{grid-template-columns:1fr 1fr}.pasos::before{display:none}
+  .paquetes{grid-template-columns:1fr}.paquete.estrella{transform:none;margin-top:10px}
+  .nicho .env{grid-template-columns:1fr}
+}
+@media (max-width:560px){.pasos{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.cinta .rueda{animation:none}}
+
 @media (max-width:980px){
   .portada .env{grid-template-columns:1fr}
   .escudo{width:min(260px,70%);order:-1;margin-top:10px}
@@ -255,6 +317,7 @@ footer a{color:var(--suave)}
     <nav class="menu" aria-label="Principal">
       <a href="#servicios">Servicios</a>
       <a href="#trabajos">Trabajos</a>
+      <a href="#precios">Precios</a>
       <a href="#soporte-pc">Soporte de PC</a>
       <a href="#contacto">Contacto</a>
       <a class="btn btn-wa btn-chico js-wa" href="https://wa.me/56974479565" target="_blank" rel="noopener">Conversemos</a>
@@ -271,13 +334,16 @@ footer a{color:var(--suave)}
       <p>Le hacemos la página web, con pedidos y reservas por WhatsApp, y la ve publicada antes de pagar. Además vamos a su domicilio en Santiago, sin recargo, a hacer la mantención o el formateo de su computador, o a recuperar el acceso si olvidó la contraseña.</p>
       <div class="acciones">
         <a class="btn btn-wa js-wa" href="https://wa.me/56974479565" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>Conversemos por WhatsApp</a>
-        <a class="btn" href="#servicios">Ver los servicios</a>
+        <a class="btn" href="#precios">Ver precios</a>
       </div>
+      <div class="confia"><span>La ve publicada antes de pagar</span><span>6 sitios de clientes en vivo</span><span>Le contesta quien la hace</span></div>
       </div>
       <div class="escudo" aria-hidden="true"><img src="assets/logo-fondo.webp" alt="" width="512" height="512"></div>
     </div>
     <a class="desliza" href="#obras">Desliza<span></span></a>
   </section>
+
+  <div class="cinta" role="img" aria-label="Rubros: Barberías, Salones de belleza, Uñas y pestañas, Restaurantes y sushi, Fletes y mudanzas, Construcción, Residencias, Estudios de tatuaje, Clínicas y estética, Soporte de PC"><div class="rueda" aria-hidden="true"><span><i></i>Barberías</span><span><i></i>Salones de belleza</span><span><i></i>Uñas y pestañas</span><span><i></i>Restaurantes y sushi</span><span><i></i>Fletes y mudanzas</span><span><i></i>Construcción</span><span><i></i>Residencias</span><span><i></i>Estudios de tatuaje</span><span><i></i>Clínicas y estética</span><span><i></i>Soporte de PC</span><span><i></i>Barberías</span><span><i></i>Salones de belleza</span><span><i></i>Uñas y pestañas</span><span><i></i>Restaurantes y sushi</span><span><i></i>Fletes y mudanzas</span><span><i></i>Construcción</span><span><i></i>Residencias</span><span><i></i>Estudios de tatuaje</span><span><i></i>Clínicas y estética</span><span><i></i>Soporte de PC</span></div></div>
 
   <!-- Nuestros sitios en un notebook y un celular: los cuadros avanzan con el scroll -->
   <section class="animacion" id="obras" aria-label="Sitios que hemos entregado">
@@ -333,6 +399,83 @@ footer a{color:var(--suave)}
             <div class="precio">Desde $15.000<span>mantención $25.000 · formateo $30.000</span></div>
             <div class="botones"><a class="btn btn-chico" href="#soporte-pc">Ver detalle</a><a class="btn btn-chico btn-verde js-wa" data-msg="Hola, necesito soporte para mi computador a domicilio" href="https://wa.me/56974479565" target="_blank" rel="noopener">Agendar</a></div></div>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloque" id="como-funciona" style="padding-top:0">
+    <div class="env">
+      <div class="titulo aparece"><span class="pildora">Sin adelanto</span><h2 style="margin-top:18px">Primero la ve. <span class="c2">Después, usted decide.</span></h2><p>Así trabajamos cada página web, desde el primer mensaje hasta que queda a su nombre.</p></div>
+      <div class="pasos">
+        <div class="paso aparece"><b>1</b><h3>Nos escribe</h3><p>Por WhatsApp nos cuenta su rubro, o simplemente nos pasa su Instagram o su ficha de Google.</p></div>
+        <div class="paso aparece"><b>2</b><h3>La armamos</h3><p>Con sus fotos, sus servicios, sus reseñas y su forma de atender. Nada de plantillas con fotos de banco.</p></div>
+        <div class="paso aparece"><b>3</b><h3>La ve en vivo</h3><p>Le mandamos el enlace para que la recorra en el celular y en el computador, y pida los cambios que quiera.</p></div>
+        <div class="paso aparece"><b>4</b><h3>Si le gusta, es suya</h3><p>Recién ahí paga, una sola vez, y la publicamos con su propio dominio .cl.</p></div>
+      </div>
+      <div class="garantia aparece"><p>Si no le gusta, <span>no paga nada.</span></p><a class="btn btn-wa js-wa" data-msg="Hola, quiero ver una demo de la página de mi negocio" href="https://wa.me/56974479565" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>Quiero ver mi demo</a></div>
+    </div>
+  </section>
+
+  <section class="bloque precios" id="precios">
+    <div class="env">
+      <div class="titulo aparece"><h2>Precios <span class="c1">claros</span></h2><p>Tres formas de tener su negocio en internet, sin letra chica y sin pagar antes de ver la página.</p></div>
+      <div class="paquetes">
+        <article class="paquete aparece">
+          <h3>Página web</h3><p class="para">Para que lo encuentren y le escriban.</p>
+          <div class="valor">$120.000<small>pago único</small></div>
+          <ul>
+            <li>Diseño con su marca, fotos y servicios</li>
+            <li>Pedidos o reservas que llegan por WhatsApp</li>
+            <li>Dominio .cl por un año y hosting incluidos</li>
+            <li>3 meses de cambios sin costo</li>
+          </ul>
+          <a class="btn btn-chico js-wa" data-msg="Hola, me interesa la página web de $120.000" href="https://wa.me/56974479565" target="_blank" rel="noopener">Pedir mi demo</a>
+        </article>
+        <article class="paquete estrella aparece">
+          <span class="cinta-p">Recomendado</span>
+          <h3>Presencia completa</h3><p class="para">Para que lo encuentren, le escriban y le compren.</p>
+          <div class="valor">Se cotiza<small>según su negocio</small></div>
+          <ul>
+            <li>Todo lo de la página web</li>
+            <li>Ficha de Google lista: horario, fotos y botón de reseñas</li>
+            <li>Apoyo con anuncios en Instagram y Facebook</li>
+            <li>El presupuesto de los anuncios lo define usted, aparte</li>
+          </ul>
+          <a class="btn btn-chico js-wa" data-msg="Hola, me interesa el paquete Presencia completa (web + Google + anuncios)" href="https://wa.me/56974479565" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>Cotizar paquete</a>
+        </article>
+        <article class="paquete aparece">
+          <h3>Plan mensual</h3><p class="para">Para que su página no quede quieta.</p>
+          <div class="valor">$15.000<small>al mes, desde el 4.º mes</small></div>
+          <ul>
+            <li>Cambios de precios, textos y fotos</li>
+            <li>Su ficha de Google al día</li>
+            <li>Revisamos cada mes que todo funcione</li>
+            <li>Opcional: lo toma solo si lo necesita</li>
+          </ul>
+          <a class="btn btn-chico js-wa" data-msg="Hola, quiero saber más del plan mensual de $15.000" href="https://wa.me/56974479565" target="_blank" rel="noopener">Consultar</a>
+        </article>
+      </div>
+      <p class="letra-chica aparece">¿Necesita algo más grande? Automatizaciones y sistemas a medida se cotizan aparte. <a href="#servicios">Ver servicios</a></p>
+    </div>
+  </section>
+
+  <section class="bloque nicho" id="barberias">
+    <div class="env">
+      <div class="aparece">
+        <span class="pildora">Especialidad</span>
+        <h2 style="margin-top:18px;font-size:clamp(2.6rem,5.4vw,4.2rem)">Páginas para <span class="c1">barberías</span> y <span class="c2">salones</span></h2>
+        <ul class="rasgos">
+          <li><i>01</i><div><b>Hora por WhatsApp</b><span>El cliente elige servicio, día y hora, y el mensaje le llega ya escrito.</span></div></li>
+          <li><i>02</i><div><b>Servicios con precio</b><span>Cortes, color, uñas o barba con su valor a la vista, sin preguntar por interno.</span></div></li>
+          <li><i>03</i><div><b>Sus trabajos en video</b><span>Los reels de su Instagram y una galería de fotos dentro de la página.</span></div></li>
+          <li><i>04</i><div><b>Sus reseñas de Google</b><span>La nota y los comentarios de sus clientes reales, en la portada.</span></div></li>
+        </ul>
+        <div class="acciones"><a class="btn btn-wa js-wa" data-msg="Hola, tengo una barbería o salón y quiero ver mi demo" href="https://wa.me/56974479565" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>Ver la demo de mi local</a><a class="btn" href="paginas-web/">Ver por rubro</a></div>
+      </div>
+      <div class="escenario aparece">
+        <div class="navegador"><div class="barra-n"><i></i><i></i><i></i><em>carlaashly.cl</em></div>
+          <img src="assets/trabajos/carla-ashly-pc.webp" alt="Portada del sitio del salón Carla Ashly en computador" loading="lazy" width="1152" height="720"></div>
+        <div class="telefono"><video muted loop playsinline autoplay preload="none" poster="assets/trabajos/carla-ashly.jpg" src="assets/trabajos/carla-ashly.mp4"></video></div>
       </div>
     </div>
   </section>
@@ -413,6 +556,19 @@ footer a{color:var(--suave)}
         <div class="razon aparece"><h3>Hecha a su medida</h3><p>No es una plantilla genérica: lleva su carta, sus fotos, sus reseñas y la forma en que usted atiende.</p></div>
       </div>
       <p class="frase aparece">Cada cliente que no encuentra su negocio en Google <span class="c1">se va con la competencia</span></p>
+    </div>
+  </section>
+
+  <section class="bloque" id="preguntas" style="padding-top:0">
+    <div class="env">
+      <div class="titulo aparece" style="text-align:center"><h2>Preguntas <span class="c2">frecuentes</span></h2></div>
+      <div class="preguntas aparece">
+        <details open><summary>¿Dónde está la trampa?</summary><p>No hay. Armamos la página con lo que su negocio ya muestra en Instagram o Google para que la vea funcionando. Si no le gusta, no paga nada y la damos de baja.</p></details>
+        <details><summary>¿Qué incluyen los $120.000?</summary><p>El diseño con su marca, los pedidos o reservas por WhatsApp, el dominio .cl por un año, el hosting y 3 meses de cambios. Es un pago único.</p></details>
+        <details><summary>¿Cuánto se demora?</summary><p>La primera versión la tiene en pocos días. Desde ahí la ajustamos con usted hasta que quede como la quiere.</p></details>
+        <details><summary>¿Y después de los 3 meses?</summary><p>La página sigue funcionando. Si quiere seguir haciendo cambios o tener su ficha de Google al día, existe el plan mensual de $15.000, que es opcional.</p></details>
+        <details><summary>¿Atienden fuera de Santiago?</summary><p>Sí: las páginas web las hacemos a distancia para todo Chile. El soporte de computadores a domicilio es en Santiago.</p></details>
+      </div>
     </div>
   </section>
 
